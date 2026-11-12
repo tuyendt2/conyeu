@@ -1,11 +1,11 @@
 // Service worker: lưu toàn bộ app vào bộ nhớ đệm để dùng offline.
 // Khi cập nhật nội dung, tăng VERSION để điện thoại tải bản mới.
-const VERSION = "beyeu-v2";
+const VERSION = "beyeu-v3";
 const FILES = [
   "./", "index.html", "style.css", "app.js", "manifest.webmanifest", "icon.svg",
   "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png", "icons/apple-touch-icon.png",
   "data/stories.js", "data/stories2.js", "data/songs.js", "data/poems.js",
-  "data/parenting.js", "data/health.js", "data/english.js", "data/extra.js",
+  "data/parenting.js", "data/health.js", "data/english.js", "data/extra.js", "data/baby.js",
 ];
 
 self.addEventListener("install", (e) => {

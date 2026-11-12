@@ -1,6 +1,6 @@
 # Bé Yêu Mỗi Ngày
 
-Ứng dụng giúp ba mẹ kể chuyện, hát, đọc thơ, học tiếng Anh cùng con (2–10 tuổi), kèm bài học dạy con và mẹo sức khỏe mỗi ngày. Chạy offline, cài được lên điện thoại (PWA).
+Ứng dụng giúp ba mẹ kể chuyện, hát, đọc thơ, học tiếng Anh cùng con (từ thai kỳ đến 10 tuổi), kèm bài học dạy con và mẹo sức khỏe mỗi ngày. Chạy offline, cài được lên điện thoại (PWA).
 
 ## Nội dung
 | Mục | Số lượng | File |

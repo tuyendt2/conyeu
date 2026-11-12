@@ -10,7 +10,11 @@ const CATS = {
   health:  { label: "Sức khỏe",           icon: "🩺", data: window.DATA_HEALTH || [] },
 };
 const DONE_WORD = { story: "Đã kể", song: "Đã hát", poem: "Đã đọc", english: "Đã học", parent: "Đã áp dụng", health: "Đã làm" };
-const AGES = { "2-3": "2–3 tuổi", "4-6": "4–6 tuổi", "7-10": "7–10 tuổi", all: "Mọi độ tuổi" };
+const AGES = { bau: "Thai kỳ", "0-6m": "0–6 tháng", "6-24m": "6–24 tháng", "2-3": "2–3 tuổi", "4-6": "4–6 tuổi", "7-10": "7–10 tuổi", all: "Mọi độ tuổi" };
+const AGE_ICON = { bau: "🤰", "0-6m": "🍼", "6-24m": "🧸" };
+const ageIcon = (a) => AGE_ICON[a] || "👶";
+// Cách gọi trong câu chào: "gợi ý cho <bé 2–3 tuổi>"
+const ageWho = (a) => a === "bau" ? "mẹ bầu và bé trong bụng" : a === "all" ? "bé ở mọi độ tuổi" : "bé " + AGES[a];
 
 // ---------- Lưu trữ ----------
 const KEY = "beyeu.v1";
@@ -127,7 +131,7 @@ function snippet(it) {
   if (it.cat === "english" && it.words) return it.words.slice(0, 4).map(([en, vi]) => `${en} – ${vi}`).join(" · ");
   return (it.lesson || it.content || "").replace(/\s+/g, " ").slice(0, 160);
 }
-const ageLabel = (it) => it.ages ? "👶 " + it.ages.map((a) => a.replace("-", "–")).join(", ") + " tuổi" : "";
+const ageLabel = (it) => it.ages ? ageIcon(it.ages.includes(age()) ? age() : it.ages[0]) + " " + Object.keys(AGES).filter((a) => it.ages.includes(a)).map((a) => AGES[a]).join(", ") : "";
 function badges(it) {
   const used = timesUsed(it.id).length;
   return [
@@ -183,7 +187,7 @@ function viewToday() {
   const mini = (title, arr) => arr.length ? `<h2>${title}</h2><div class="mini-list">${arr.map((x) => `<a href="#item/${x.id}">${CATS[x.cat].icon} ${esc(x.title)}</a>`).join("")}</div>` : "";
 
   return `<div class="hello">
-      <div><h1>Chào ${part}! 👋</h1><div class="muted">Hôm nay ${fmtDate(dateKey())} — gợi ý cho bé <b>${AGES[age()]}</b>${name}.</div></div>
+      <div><h1>Chào ${part}! 👋</h1><div class="muted">Hôm nay ${fmtDate(dateKey())} — gợi ý cho <b>${ageWho(age())}</b>${name}.</div></div>
       <div class="stats">
         <span class="stat">🔥 Chuỗi <b>${streak()}</b> ngày</span>
         <span class="stat">📖 Đã kể <b>${total}</b> lần</span>
@@ -416,7 +420,7 @@ $("#searchInput").addEventListener("input", (e) => {
   const q = e.target.value.trim();
   if (q.length >= 2) searchTimer = setTimeout(() => { history.replaceState(null, "", "#search/" + encodeURIComponent(q)); render(); $("#searchInput").value = q; }, 300);
 });
-$("#ageSel").innerHTML = Object.entries(AGES).map(([k, v]) => `<option value="${k}">👶 ${v}</option>`).join("");
+$("#ageSel").innerHTML = Object.entries(AGES).map(([k, v]) => `<option value="${k}">${ageIcon(k)} ${v}</option>`).join("");
 $("#ageSel").onchange = (e) => setAge(e.target.value);
 $("#themeBtn").onclick = () => { state.settings.theme = isDark() ? "light" : "dark"; save(); applySettings(); };
 $("#fontUp").onclick = () => { state.settings.font = Math.min(26, (state.settings.font || 17) + 1); save(); applySettings(); };

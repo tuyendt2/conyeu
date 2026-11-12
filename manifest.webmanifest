@@ -1,7 +1,7 @@
 {
   "name": "Bé Yêu Mỗi Ngày",
   "short_name": "Bé Yêu",
-  "description": "Truyện, bài hát, thơ, tiếng Anh cho bé 2–10 tuổi và bài học dạy con, sức khỏe gia đình.",
+  "description": "Truyện, bài hát, thơ, tiếng Anh từ thai kỳ đến 10 tuổi và bài học dạy con, sức khỏe gia đình.",
   "lang": "vi",
   "start_url": "./index.html#today",
   "scope": "./",
